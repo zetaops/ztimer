@@ -5,7 +5,7 @@
 
 Define your test codes in a class that extends Timer class and call it:
 
-    from timer import Timer
+    from ztimer import Timer
     
     
     class A(object):
