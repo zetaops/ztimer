@@ -3,9 +3,11 @@
 
 ### Easy to use class based code timer / benchmarking tool for Python ###
 
-Define your test codes in a class that extends Timer class and call it:
+Define your test codes in a class that extends Timer class then run it:
 
-    from ztimer import Timer
+```python
+
+    from ztimer import Timer, K, M
     
     
     class A(object):
@@ -34,7 +36,7 @@ Define your test codes in a class that extends Timer class and call it:
     aa = AA()
     b = B()
     
-    class Tst(Timer):
+    class MyTest(Timer):
     
         def getattribute_with_tryexcept(self):
             a.a, a.b, a.c
@@ -47,8 +49,9 @@ Define your test codes in a class that extends Timer class and call it:
     
     
     
-    Tst()
-
+    MyTest() # equivalent to MyTest(M) or  MyTest(repeat=1000000, show_results=False) 
+```
+     
 
 ### Generates: ###
 

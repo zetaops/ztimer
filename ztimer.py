@@ -8,9 +8,9 @@
 # (GPLv3).  See LICENSE.txt for details.
 
 from time import time
+
 K = 1000
 M = K * K
-
 DEFAULT_REPEAT_COUNT = M
 
 
@@ -45,6 +45,6 @@ class Timer(object):
     def prnt(self, name, took, result=None):
         if result is not None:
             result= "result: %s" % result
-        print '%s: %s sec %s' % (name.ljust(40), str(round(took, 5)).ljust(8), result or '')
+        print('%s: %s sec %s' % (name.ljust(40), str(round(took, 5)).ljust(8), result or ''))
 
 
