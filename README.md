@@ -1,68 +1,53 @@
 
 ##ZTimer ##
 
-### Easy to use class based code timer / benchmarking tool for Python ###
+### Easy to use class based timing / benchmarking tool for Python ###
 
 Define your test codes in a class that extends Timer class then run it:
 
 ```python
 
-    from ztimer import Timer, K, M
+
+from ztimer import Timer, M
+
+
+class DotDict(dict):
+    def __getattr__(self, attr):
+        return self.get(attr, None)
+
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__
+
+dot_dict = DotDict({'a': 1})
+a_dict = {'a': 1}
+
+class MyTest(Timer):
+
+    def dot_notation(self):
+        dot_dict.a
+
+    def bracket_notation(self):
+        a_dict['a']
+
+    def by_getter(self):
+        a_dict.get('a')
+
+
+
+MyTest(2*M)
     
-    
-    class A(object):
-        obj_cache = {'a': {}, 'b': 12345, 'c': []}
-        def __getattribute__(self, key):
-            try:
-                return object.__getattribute__(self, 'obj_cache')[key]
-            except KeyError:
-                return object.__getattribute__(self, key)
-    
-    
-    class AA(object):
-        obj_cache = {'a': {}, 'b': 12345, 'c': []}
-        def __getattribute__(self, key):
-            if key in super(AA, self).__getattribute__('obj_cache'):
-                return object.__getattribute__(self, 'obj_cache')[key]
-            else:
-                return object.__getattribute__(self, key)
-    
-    class B(object):
-        a = {}
-        b = 12345
-        c = []
-    
-    a = A()
-    aa = AA()
-    b = B()
-    
-    class MyTest(Timer):
-    
-        def getattribute_with_tryexcept(self):
-            a.a, a.b, a.c
-    
-        def getattribute_with_ifelse(self):
-            aa.a, aa.b, aa.c
-    
-        def without_getattribute(self):
-            b.a, b.b, b.c
-    
-    
-    
-    MyTest() # equivalent to MyTest(M) or  MyTest(repeat=1000000, show_results=False) 
+MyTest() # equivalent to MyTest(M) or  MyTest(repeat=1000000, show_results=False, hide_unsorted=True) 
 ```
      
 
 ### Generates: ###
 
+    Running dot_notation [ 3 / 3 ] 
 
-    getattribute_with_ifelse                : 3.13824  sec 
-    getattribute_with_tryexcept             : 1.80899  sec 
-    without_getattribute                    : 0.30323  sec 
     
-    Each method run 1,000,000 times, sorted results listed bellow:
+    Each method run 2,000,000 times:
     
-    without_getattribute                    : 0.30323  sec 
-    getattribute_with_tryexcept             : 1.80899  sec 
-    getattribute_with_ifelse                : 3.13824  sec
+    bracket_notation   : 0.33024 sec  
+    by_getter          : 0.5028 sec 1.5x slower 
+    dot_notation       : 2.13898 sec 6.5x slower
 

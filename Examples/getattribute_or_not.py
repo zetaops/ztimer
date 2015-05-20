@@ -1,12 +1,10 @@
 # -*-  coding: utf-8 -*-
 """
-__getattribute__ is 10 times slower
+Each method run 1,000,000 times:
 
-Each method run 1,000,000 times, sorted results listed bellow:
-
-without_getattribute                    : 0.3029   sec
-getattribute_with_tryexcept             : 1.83485  sec
-getattribute_with_ifelse                : 3.12716  sec
+without_getattribute                    : 0.297    sec
+getattribute_with_tryexcept             : 1.79314  sec 6.0x slower
+getattribute_with_ifelse                : 3.25342  sec 11.0x slower
 """
 
 # Copyright (C) 2015 ZetaOps Inc.
@@ -55,5 +53,5 @@ class Tst(Timer):
 
 
 
-Tst()
+Tst(method_list=['getattribute_with_ifelse', 'without_getattribute'])
 
