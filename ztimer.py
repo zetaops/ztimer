@@ -13,7 +13,10 @@ import sys
 K = 1000
 M = K * K
 DEFAULT_REPEAT_COUNT = M
-
+try:
+    xrange
+except NameError:
+    xrange = range
 
 class Timer(object):
     def __init__(self, repeat=None, show_results=False, hide_unsorted=True, method_list=[]):
