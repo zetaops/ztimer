@@ -84,7 +84,7 @@ class Timer(object):
         for rnk in sorted_ranks:
             itm = self._zt_rank[rnk]
             self._zt_report(itm[0], rnk, result=itm[1],
-                        slowness=round(rnk / sorted_ranks[0], 1) if rnk != sorted_ranks[0] else '')
+                        slowness=round(rnk / sorted_ranks[0], 2) if rnk != sorted_ranks[0] else '')
 
     def _zt_report(self, name, took, slowness='', result=''):
         if result:
