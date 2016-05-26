@@ -1,7 +1,5 @@
 # -*-  coding: utf-8 -*-
 """
-While it's nice to be able to use dots instead of ugly brackets and quotes, it's unacceptably slower.
-
 Each method run 2,000,000 times:
 
 check_with_in    : 0.74073 sec

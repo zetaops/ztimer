@@ -19,7 +19,7 @@ except NameError:
     xrange = range
 
 class Timer(object):
-    def __init__(self, repeat=None, show_results=False, hide_unsorted=True, method_list=[]):
+    def __init__(self, repeat=None, show_results=False, hide_unsorted=True, method_list=None):
         """
 
         :param repeat: integer, default: DEFAULT_REPEAT_COUNT number of calls for each method.
@@ -28,10 +28,10 @@ class Timer(object):
         :param method_list: limit tests to listed methods.
         :return:
         """
-        super(Timer, self).__init__()
+        # super(Timer, self).__init__()
         self._zt_hide_unsorted = hide_unsorted
         self._zt_rank = {}
-        self._zt_test_methods = method_list
+        self._zt_test_methods = method_list or []
         self._zt_show_results = show_results
         self._zt_pad_len = 0
         self._zt_repeat = repeat or DEFAULT_REPEAT_COUNT
@@ -85,6 +85,7 @@ class Timer(object):
             itm = self._zt_rank[rnk]
             self._zt_report(itm[0], rnk, result=itm[1],
                         slowness=round(rnk / sorted_ranks[0], 2) if rnk != sorted_ranks[0] else '')
+        print("\n = = = = = \n")
 
     def _zt_report(self, name, took, slowness='', result=''):
         if result:
@@ -92,4 +93,7 @@ class Timer(object):
         if slowness:
             slowness = "%sx slower" % slowness
 
-        print('%s: %s %s %s' % (name.ljust(self._zt_pad_len), (str(round(took, 5)) + ' sec').ljust(10), slowness, result))
+        print('%s: %s %s %s' % (
+            name.ljust(self._zt_pad_len),
+            (str(round(took, 5)) + ' sec').ljust(10), slowness, result)
+              )
